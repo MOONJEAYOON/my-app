@@ -37,7 +37,7 @@ const Header = () => {
                 <Link to="/add-board">글쓰기</Link>
                 {isAuth ? (
                     <>
-                        <Link to="/myboard-list?page=1">내 게시물</Link>
+                        <Link to="/myboard-list?page=1">마이페이지</Link>
                         <Link to="#" onClick={logout}>로그아웃</Link>
                     </>
                 ) : (

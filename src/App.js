@@ -30,7 +30,13 @@ const App = () => {
                     }
                 />
                 <Route path="/board-list" element={<BoardList/>}/>
-                <Route path="/board/:board_id" element={<Board/>}/>
+                <Route
+                    path="/board/:board_id"
+                    element={
+                        // URI 파라미터가 존재하므로 전체 url을 PrivateRoute에 넘겨준다
+                        <PrivateRoute path={`${location.pathname}`} component={Board}/>
+                    }
+                />
                 <Route
                     path="/edit-board/:board_id"
                     element={
