@@ -34,11 +34,10 @@ const Header = () => {
             </div>
             <div className="header-menu">
                 <Link to="/board-list?page=1">게시판</Link>
-                <Link to="/add-board">글쓰기</Link>
                 {isAuth ? (
                     <>
-                        <Link to="/myboard-list?page=1">마이페이지</Link>
-                        <Link to="#" onClick={logout}>로그아웃</Link>
+                        <Link to="/myPage">마이페이지</Link>
+                        <Link to="" onClick={logout}>로그아웃</Link>
                     </>
                 ) : (
                     <>

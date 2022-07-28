@@ -10,6 +10,8 @@ import {useSelector} from "react-redux";
 // import DisabledByDefaultOutlinedIcon from "@mui/icons-material/DisabledByDefaultOutlined";
 import api from "../../utils/api";
 import moment from "moment";
+import Comments from "../../components/Comments";
+
 const Board = () => {
     // URL 파라미터 받기 - board의 id
     const {board_id} = useParams();
@@ -57,7 +59,8 @@ const Board = () => {
                         </div>
                     )}
                     <div className="board-header">
-                        <div className="board-header-username">{board.writer}</div>
+                        <div className="board-header-username">작성자 : {board.writer}</div>
+
                         <div className="board-header-date">{moment(board.created).add(9,"hour").format('YYYY-MM-DD')}</div>
                     </div>
                     <hr/>
@@ -69,10 +72,13 @@ const Board = () => {
                         <div className="board-title-content">
                             <div className="board-title">{board.title}</div>
                             <div className="board-content">{board.content}</div>
+                            <div className="board-views">조회수 : {board.views}</div>
                         </div>
                     </div>
                     <hr/>
-                    <div className="board-footer"></div>
+                    <div className="board-footer">
+                        <Comments board_id={board_id}/>
+                    </div>
                 </div>
             )}
 

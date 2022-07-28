@@ -109,6 +109,7 @@
       }
     }
     .board-title-content{
+      position: relative;
       word-break: break-all;
       margin-left: 1rem;
       overflow: auto;
@@ -123,6 +124,12 @@
         color: midnightblue;
       }
       .board-content{
+        font-size: 1.2rem;
+      }
+      .board-views{
+        position: absolute;
+        bottom: 0;
+        right: 0;
         font-size: 1.2rem;
       }
     }

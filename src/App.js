@@ -10,6 +10,7 @@ import BoardList from "./pages/board-list/BoardList";
 import Board from "./pages/board/Board";
 import EditBoard from "./pages/edit-board/EditBoard";
 import MyBoardList from "./pages/myboard-list/MyBoardList";
+import MyPage from "./pages/myPage/MyPage";
 
 
 
@@ -51,6 +52,14 @@ const App = () => {
                         <PrivateRoute path={`${location.pathname}`} component={MyBoardList}/>
                     }
                 />
+                <Route
+                    path="/myPage"
+                    element={
+                        // 쿼리 파라미터가 존재하므로 전체 url을 PrivateRoute에 넘겨준다
+                        <PrivateRoute path={`${location.pathname}`} component={MyPage}/>
+                    }
+                />
+
             </Routes>
         </React.Fragment>
     )
