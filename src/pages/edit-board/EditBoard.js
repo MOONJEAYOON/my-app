@@ -66,8 +66,10 @@ const EditBoard = () => {
                     "file": file
                 });
             }
-
-            window.alert("😎수정이 완료되었습니다😎");
+            toast.success(<h3>😎수정이 완료되었습니다😎</h3>, {
+                position: "top-center",
+                autoClose: 2000
+            });
             // 이전 페이지로 돌아가기
             navigate(`/board/${board_id}`);
         } catch (e) {

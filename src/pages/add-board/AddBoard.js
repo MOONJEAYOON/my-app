@@ -37,7 +37,10 @@ const AddBoard = () => {
                 "content": content,
                 "file": image.image_file.name
             });
-            window.alert("😎등록이 완료되었습니다😎");
+            toast.success(<h3>😎등록이 완료되었습니다😎</h3>, {
+                position: "top-center",
+                autoClose: 2000
+            });
             navigate("/board-list");
         } catch (e) {
             // 서버에서 받은 에러 메시지 출력

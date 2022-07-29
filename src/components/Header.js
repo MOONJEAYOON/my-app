@@ -1,5 +1,6 @@
 import "./header.scss";
 import {Link, useNavigate} from "react-router-dom";
+import {toast, ToastContainer} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
 import {jwtUtils} from "../utils/jwtUtils";
 import {useEffect, useState} from "react";
@@ -22,31 +23,39 @@ const Header = () => {
     }, [token]);
     const logout = async () => {
         await dispatch(setToken(""));
-        alert("로그아웃 되었습니다😎");
+        toast.success(<h3>로그아웃 되었습니다😎</h3>, {
+            position: "top-center",
+            autoClose: 2000
+        });
         navigate("/");
     };
     return (
-        <div className="header-wrapper">
-            <div className="header-title">
-                <Link to="/">
-                    <span>U+tech</span>
-                </Link>
+        <>
+            <ToastContainer/>
+            <div className="header-wrapper">
+                <div className="header-title">
+                    <Link to="/">
+                        <span>U+tech</span>
+                    </Link>
+                </div>
+                <div className="header-menu">
+                    <Link to="/board-list?page=1">게시판</Link>
+                    {isAuth ? (
+                        <>
+                            <Link to="/myPage">마이페이지</Link>
+                            <Link to="" onClick={logout}>로그아웃</Link>
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login">로그인</Link>
+                            <Link to="/sign-up">회원가입</Link>
+                        </>
+                    )}
+                </div>
             </div>
-            <div className="header-menu">
-                <Link to="/board-list?page=1">게시판</Link>
-                {isAuth ? (
-                    <>
-                        <Link to="/myPage">마이페이지</Link>
-                        <Link to="" onClick={logout}>로그아웃</Link>
-                    </>
-                ) : (
-                    <>
-                        <Link to="/login">로그인</Link>
-                        <Link to="/sign-up">회원가입</Link>
-                    </>
-                )}
-            </div>
-        </div>
+        </>
+
+
     );
 };
 

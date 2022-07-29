@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import api from "../../utils/api";
 import moment from "moment";
 import Comments from "../../components/Comments";
+import {toast} from "react-toastify";
 
 const Board = () => {
     // URL 파라미터 받기 - board의 id
@@ -100,7 +101,10 @@ const Board = () => {
                                     setShow(false);
                                     // 모달의 예 버튼 클릭시 게시물 삭제
                                     await api.delete(`/api/boards/delete/${board_id}`);
-                                    alert("게시물이 삭제되었습니다😎");
+                                    toast.success(<h3>게시물이 삭제되었습니다😎</h3>, {
+                                        position: "top-center",
+                                        autoClose: 2000
+                                    });
                                     navigate("/board-list");
                                 }}
 
