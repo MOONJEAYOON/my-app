@@ -23,6 +23,7 @@ const EditBoard = () => {
         image_file: "",
         preview_URL: "image/default_image.png",
     });
+    const [file, setFile] = useState("");
 
     // 사용자가 직전에 등록한 게시물의 상태를 그대로 보여주기 위해
     // 컴포넌트가 마운트되고 URI 파라미터에 해당하는 board를 가져와서
@@ -38,7 +39,7 @@ const EditBoard = () => {
             // 이미지는 파일을 불러올 필요가 없이 미리보기 url만 가져온다.
             // 이미지를 선택하지 않고 올리면 db에 저장되어 있는 이미지를 그대로 사용!
             setImage({...image, preview_URL: `/image/${result.data.file}`})
-
+            setFile(result.data.file);
         });
     }, [])
 
@@ -50,15 +51,21 @@ const EditBoard = () => {
         try {
             const formData = new FormData();
 
-            formData.append("fileData", image.image_file);
-
-            await api.post("/api/fileData", formData);
-
-            await api.put(`/api/boards/update/${board_id}`, {
-                "title": title,
-                "content": content,
-                "file": image.image_file.name
-            });
+            if (image.image_file.name != undefined) {
+                formData.append("fileData", image.image_file);
+                await api.post("/api/fileData", formData);
+                await api.put(`/api/boards/update/${board_id}`, {
+                    "title": title,
+                    "content": content,
+                    "file": image.image_file.name
+                });
+            } else {
+                await api.put(`/api/boards/update/${board_id}`, {
+                    "title": title,
+                    "content": content,
+                    "file": file
+                });
+            }
 
             window.alert("😎수정이 완료되었습니다😎");
             // 이전 페이지로 돌아가기
